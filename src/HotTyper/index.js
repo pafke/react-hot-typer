@@ -36,8 +36,15 @@ export default class MovingCursor extends React.Component {
         highlightedText,
         isFinished
       },
-      props: { text, speedOfLoop, typingRate, highlightDuration, onFinish }
+      props: { text, speedOfLoop, typingRate, highlightDuration, onFinish, loop }
     } = this;
+
+    const checkLoop = function() {
+      if(prevState.currentTextIndex + 1 == text.length && loop) {
+        return 0;
+      }
+      return prevState.currentTextIndex + 1;
+    }
 
     if (
       isTyping &&
@@ -53,9 +60,9 @@ export default class MovingCursor extends React.Component {
           ? {
               isTyping: false,
               textToBe: Array.isArray(text)
-                ? text[prevState.currentTextIndex + 1]
+                ? text[checkLoop()]
                 : text,
-              currentTextIndex: prevState.currentTextIndex + 1
+              currentTextIndex: checkLoop()
             }
           : {
               highlightedText: currentTextDirection
@@ -141,6 +148,7 @@ export default class MovingCursor extends React.Component {
     cursorFlashRate: PropTypes.number,
     initialDelay: PropTypes.number,
     selectionColor: PropTypes.string,
+    loop: PropTypes.bool,
     cursor: cursorPropType
   };
 
@@ -151,11 +159,12 @@ export default class MovingCursor extends React.Component {
     highlightDuration: 150,
     hideCursorOnEnd: true,
     initialDelay: 800,
-    selectionColor: 'red'
+    selectionColor: 'red',
+    loop: false
   };
   render() {
     const {
-      props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor, selectionColor},
+      props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor, selectionColor, loop },
       state: { isTyping, currentText, highlightedText, isFinished }
     } = this;
 

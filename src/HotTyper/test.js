@@ -11,6 +11,7 @@ const wrapperStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
+  backgroundColor: 'grey',
   width: '100%',
   padding: '20px',
 };
@@ -29,9 +30,9 @@ class Test extends React.Component {
           <MovingCursor
             style={{ fontSize: 32 }}
             selectionColor={'#FFF'}
+            loop={true}
             text={[
               'Make your text animated TEST PAFKE',
-              'Make your text elegent',
               'Make your text stylish',
               'Make your text stylish with ZERO effort from you ;).'
             ]}
