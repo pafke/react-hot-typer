@@ -140,6 +140,7 @@ export default class MovingCursor extends React.Component {
     typingRate: PropTypes.number,
     cursorFlashRate: PropTypes.number,
     initialDelay: PropTypes.number,
+    selectionColor: PropTypes.string,
     cursor: cursorPropType
   };
 
@@ -149,18 +150,19 @@ export default class MovingCursor extends React.Component {
     cursorFlashRate: 200,
     highlightDuration: 150,
     hideCursorOnEnd: true,
-    initialDelay: 800
+    initialDelay: 800,
+    selectionColor: 'red'
   };
   render() {
     const {
-      props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor },
+      props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor, selectionColor},
       state: { isTyping, currentText, highlightedText, isFinished }
     } = this;
 
     return (
       <span style={style} className={className}>
         {currentText}
-        <span style={{ color: '#fff', backgroundColor: '#3390FF' }}>
+        <span style={{ color: '#fff', backgroundColor: selectionColor }}>
           {highlightedText}
         </span>
         <span>

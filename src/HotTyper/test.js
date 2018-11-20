@@ -2,8 +2,8 @@ import React from 'react';
 import MovingCursor from './index';
 
 const wrapperStyle = {
-  fontFamily: 'Comic Sans MS',
-  color: '#fff',
+  fontFamily: 'arial',
+  color: '#000',
   fontWeight: 'bold',
   textAlign: 'center',
   fontSize: '25px',
@@ -13,11 +13,6 @@ const wrapperStyle = {
   minHeight: '100vh',
   width: '100%',
   padding: '20px',
-  backgroundImage: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)',
-  backgroundSize: 'cover',
-  boxShadow: 'inset 0 0 0 1000px rgba(0, 0, 0, 0.25)',
-  boxSizing: 'border-box',
-  textShadow: '-3px 3px 3px rgba(0,0,0,.7)'
 };
 
 class Test extends React.Component {
@@ -33,8 +28,9 @@ class Test extends React.Component {
         >
           <MovingCursor
             style={{ fontSize: 32 }}
+            selectionColor={'#FFF'}
             text={[
-              'Make your text animated',
+              'Make your text animated TEST PAFKE',
               'Make your text elegent',
               'Make your text stylish',
               'Make your text stylish with ZERO effort from you ;).'
