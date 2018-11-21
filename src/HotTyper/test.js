@@ -22,14 +22,13 @@ class Test extends React.Component {
       <div style={wrapperStyle}>
         <div
           style={{
-            maxWidth: '500px',
             display: 'flex',
             justifyContent: 'stretch'
           }}
         >
           <MovingCursor
             style={{ fontSize: 32 }}
-            selectionColor={'#FFF'}
+            selectionColor={'none'}
             loop={true}
             text={[
               'Make your text animated TEST PAFKE',

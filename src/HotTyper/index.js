@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getCommonText } from './helpers';
 import Cursor, { cursorPropType } from './Cursor';
+import SelectionAnimation from './SelectionAnimation';
 
 export default class MovingCursor extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class MovingCursor extends React.Component {
       highlightedText: '',
       isTyping: false,
       isFinished: false,
+      selectionWidth: 0,
       textToBe: Array.isArray(text) ? text[0] : text
     };
   }
@@ -94,6 +96,7 @@ export default class MovingCursor extends React.Component {
       currentTextIndex < text.length &&
       textToBe !== currentText
     ) {
+        console.log('AAAAAAA');
       const isCurrentCommon = getCommonText(currentText, textToBe).includes(
         currentText
       );
@@ -114,9 +117,11 @@ export default class MovingCursor extends React.Component {
               Number(
                 getCommonText(currentText, textToBe).length - currentText.length
               )
-            )
+            ),
+        selectionWidth: 300
       };
       setTimeout(this.setState.bind(this, newState), speedOfLoop);
+
     }
     if (currentTextIndex === text.length && isTyping) {
       this.setState({
@@ -156,7 +161,7 @@ export default class MovingCursor extends React.Component {
     speedOfLoop: 1100,
     typingRate: 100,
     cursorFlashRate: 200,
-    highlightDuration: 150,
+    highlightDuration: 15000,
     hideCursorOnEnd: true,
     initialDelay: 800,
     selectionColor: 'red',
@@ -165,14 +170,15 @@ export default class MovingCursor extends React.Component {
   render() {
     const {
       props: { cursorFlashRate, className, style, hideCursorOnEnd, cursor, selectionColor, loop },
-      state: { isTyping, currentText, highlightedText, isFinished }
+      state: { isTyping, currentText, highlightedText, isFinished, selectionWidth }
     } = this;
 
     return (
       <span style={style} className={className}>
         {currentText}
-        <span style={{ color: '#fff', backgroundColor: selectionColor }}>
+        <span id="get-width" style={{ display: 'inline-block', position: 'relative', backgroundColor: selectionColor }}>
           {highlightedText}
+          <SelectionAnimation animateWidth={selectionWidth} isHighlighted={!!highlightedText}/>
         </span>
         <span>
           <Cursor
